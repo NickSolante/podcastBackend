@@ -5,11 +5,18 @@ const { DATABASE_URL } = process.env
 
 const sequelize = new Sequelize(DATABASE_URL)
 
-try {
-  sequelize.authenticate()
-  console.log('authenictation success')
-} catch (error) {
-  console.log('error', error)
+let retries = 5
+while (retries) {
+  try {
+    sequelize.authenticate()
+    console.log('authenictation success')
+    break
+  } catch (error) {
+    console.log('error', error)
+    retries -= 1
+    console.log(`retries left ${retries}`)
+    await new Promise((res) => setTimeout(res, 5000))
+  }
 }
 
 module.exports = sequelize
