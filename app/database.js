@@ -9,7 +9,7 @@ let retries = 5
 while (retries) {
   try {
     sequelize.authenticate()
-    console.log('authenictation success')
+    console.log('Authentication is a success')
     break
   } catch (error) {
     console.log('error', error)

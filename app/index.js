@@ -1,11 +1,12 @@
 require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
+const bodyParser = require('bodyParser')
 const app = express()
 const { sequelize, models } = require('./models')
 
 const { PORT } = process.env
-
+app.use(bodyParser.json())
 app.use(cors)
 
 app.get('/', (req, res) => {
