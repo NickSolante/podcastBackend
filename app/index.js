@@ -2,7 +2,7 @@ require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
 const app = express()
-const { sequelize, User } = require('./models')
+const { sequelize, models } = require('./models')
 
 const { PORT } = process.env
 
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 // new: route to users, that runs readAll()
-app.get('/users', User.readAll)
+// app.get('/users', User.readAll)
 
 sequelize.sync().then(() => {
   app.listen(PORT, () => {

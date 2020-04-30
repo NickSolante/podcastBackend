@@ -1,12 +1,12 @@
-version: "3.8"
+version: "3"
 services:
   db:
     image: postgres
+    ports:
+      - 5432:5432
+    # volumes:
+    #   - .:/app
     environment:
-    POSTGRES_PASSWORD: mysecretpassword
-    POSTGRES_USER: postgres
-    POSTGRES_DB: podcasts
-  volumes:
-    - ./pgdata:/var/lib/docker/volumes
-  ports:
-    - "5432:5432"
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=podcasts
