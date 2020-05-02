@@ -1,7 +1,10 @@
 const fetch = require('node-fetch')
+const { md5 } = require('./lib/hash')
+const { get } = require('lodash')
 const Parser = require('rss-parser')
 const parser = new Parser()
-const { sequelize, Podcasts } = require('./models')
+const { sequelize, models } = require('./models')
+const { Podcast } = models
 
 async function getData(url) {
   await fetch(`${url}`)
@@ -12,21 +15,29 @@ async function getData(url) {
     })
 }
 
-// getData('http://podcasts.joerogan.net/feed')
-
 async function rssFetching() {
   let feed = await parser.parseURL('http://podcasts.joerogan.net/feed')
-  console.log(feed.items)
+  return feed.items.map((item) => ({
+    pcreatorID: 'testcreator',
+    title: 'test',
+    link: 'testlink',
+    pubDate: 'testpubDate',
+    comments: 'testcomments',
+    content: 'testcontent',
+    contentSnippet: 'testcontentSnippet',
+    guid: md5(get(item, 'guid', 'testlink')),
+    isoDate: 'testisoDate',
+  }))
 }
 
-rssFetching()
-
-await sequelize.transaction((transaction) =>
-  Promise.all(
-    finalFeed.map((post) => {
-      return Podcast.upsert(post, { transaction }).then((isNew) => {
-        if (isNew) newPostIds.push(post.postId)
+rssFetching().then((finalFeed) => {
+  return sequelize.transaction((transaction) =>
+    Promise.all(
+      finalFeed.map((post) => {
+        return Podcast.upsert(post, { transaction })
       })
-    })
+    )
   )
-)
+})
+
+module.exports = rssFetching

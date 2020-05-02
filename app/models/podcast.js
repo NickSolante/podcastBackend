@@ -4,7 +4,7 @@ const podcast = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tileId: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -30,6 +30,7 @@ const podcast = (sequelize, DataTypes) => {
     },
     guid: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     isoDate: {
