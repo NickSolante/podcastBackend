@@ -5,8 +5,6 @@ const app = express()
 const { sequelize, models } = require('./models')
 const rssFetching = require('./app')
 
-const { PORT } = process.env
-
 app.use(cors)
 
 app.get('/', (req, res) => {

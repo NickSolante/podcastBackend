@@ -18,15 +18,13 @@ async function getData(url) {
 async function rssFetching() {
   let feed = await parser.parseURL('http://podcasts.joerogan.net/feed')
   return feed.items.map((item) => ({
-    pcreatorID: 'testcreator',
-    title: 'test',
-    link: 'testlink',
-    pubDate: 'testpubDate',
-    comments: 'testcomments',
-    content: 'testcontent',
-    contentSnippet: 'testcontentSnippet',
-    guid: md5(get(item, 'guid', 'testlink')),
-    isoDate: 'testisoDate',
+    pcreatorID: item.creator,
+    title: item.title,
+    link: item.link,
+    pubDate: item.pubDate,
+    contentSnippet: item.contentSnippet,
+    guid: md5(get(item, 'guid', item.link)),
+    isoDate: item.isoDate,
   }))
 }
 

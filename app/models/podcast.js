@@ -1,11 +1,11 @@
 const podcast = (sequelize, DataTypes) => {
   const Podcast = sequelize.define('podcast', {
     pcreatorID: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     link: {
@@ -13,19 +13,11 @@ const podcast = (sequelize, DataTypes) => {
       allowNull: false,
     },
     pubDate: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    comments: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    content: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     contentSnippet: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     guid: {
@@ -34,7 +26,7 @@ const podcast = (sequelize, DataTypes) => {
       allowNull: false,
     },
     isoDate: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
   })
