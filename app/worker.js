@@ -1,5 +1,7 @@
-var schedule = require('node-schedule')
+const schedule = require('node-schedule')
+const PodcastWorkerQueue = require('./queue')
 const Parser = require('rss-parser')
+
 const parser = new Parser({
   headers: {
     Accept: 'application/rss+xml, application/xml',

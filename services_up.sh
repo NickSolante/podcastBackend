@@ -7,4 +7,4 @@ if [ ! -f ./app/.env ]; then
 fi
 
 # Start the podcast server
-docker-compose up -d db
+docker-compose up -d redis db
