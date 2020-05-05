@@ -1,4 +1,5 @@
 const Parser = require('rss-parser')
+const contentConfig = require('./content/index')
 const parser = new Parser({
   headers: {
     Accept: 'application/rss+xml, application/xml',
@@ -10,11 +11,11 @@ const parser = new Parser({
 //feeds.feedwrench.com/dev-ed.rss'
 
 //rss.simplecast.com/podcasts/279/rss
-async function rssFetching() {
-  let feed = await parser.parseURL(
-    'https://rss.simplecast.com/podcasts/279/rss'
-  )
-  console.log(feed.items)
-}
+// async function rssFetching() {
+//   let feed = await parser.parseURL(
+//     'https://rss.simplecast.com/podcasts/279/rss'
+//   )
+//   console.log(feed.items)
+// }
 
-rssFetching()
+// rssFetching()
