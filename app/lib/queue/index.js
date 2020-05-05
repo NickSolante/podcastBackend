@@ -12,4 +12,4 @@ contentConfig.forEach((config) =>
   })
 )
 
-module.exports = PodcastWorkerQueue
+module.exports = { PodcastWorkerQueue }

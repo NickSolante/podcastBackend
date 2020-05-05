@@ -24,14 +24,14 @@ async function rssFetching(url) {
   }))
 }
 
-rssFetching().then((finalFeed) => {
-  return sequelize.transaction((transaction) =>
-    Promise.all(
-      finalFeed.map((post) => {
-        return Podcast.upsert(post, { transaction })
-      })
-    )
-  )
-})
+// rssFetching().then((finalFeed) => {
+//   return sequelize.transaction((transaction) =>
+//     Promise.all(
+//       finalFeed.map((post) => {
+//         return Podcast.upsert(post, { transaction })
+//       })
+//     )
+//   )
+// })
 
-module.exports = rssFetching
+module.exports = { rssFetching }

@@ -1,13 +1,12 @@
-const PodcastWorkerQueue = require('./lib/queue')
+const { PodcastWorkerQueue } = require('./lib/queue')
 const { sequelize } = require('./models')
-const rssFetching = require('./app')
+const { fetchContent } = require('./lib/queue/worker')
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    PodcastWorkerQueue.process('*', fetchContent)
-  })
-  .then(() => {
-    console.log('success')
-  })
-  .catch(() => console.error('fail'))
+const onFailFetchContent = async (job) => {
+  return alert.error(job.data)
+}
+
+sequelize.sync({ force: true }).then(() => {
+  PodcastWorkerQueue.process('*', fetchContent)
+  PodcastWorkerQueue.on('failed', onFailFetchContent)
+})

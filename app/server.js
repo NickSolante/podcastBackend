@@ -3,7 +3,8 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 const { sequelize, models } = require('./models')
-const rssFetching = require('./app')
+
+const { PORT } = process.env
 
 app.use(cors)
 
@@ -12,9 +13,9 @@ app.get('/', (req, res) => {
 })
 
 sequelize
-  .sync({ force: true })
-  .then(rssFetching)
+  .sync()
   .then(() => {
+    app.listen(PORT, () => console.log(`listening to podcst ${PORT}`))
     console.log('success')
   })
   .catch(() => console.error('fail'))

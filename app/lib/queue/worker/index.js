@@ -8,7 +8,7 @@ const fetchContent = async (job) => {
   const { name, link } = data
 
   console.log(`fetching data for ${name}`)
-  const feed = await fetchFeed(link)
+  const feed = await rssFetching(link)
 
   await sequelize.transaction((transaction) =>
     Promise.all(
@@ -18,3 +18,5 @@ const fetchContent = async (job) => {
     )
   )
 }
+
+module.exports = { fetchContent }
