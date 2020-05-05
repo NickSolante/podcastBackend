@@ -2,7 +2,12 @@ const fetch = require('node-fetch')
 const { md5 } = require('./lib/hash')
 const { get } = require('lodash')
 const Parser = require('rss-parser')
-const parser = new Parser()
+const parser = new Parser({
+  headers: {
+    Accept: 'application/rss+xml, application/xml',
+  },
+})
+
 const { sequelize, models } = require('./models')
 const { Podcast } = models
 

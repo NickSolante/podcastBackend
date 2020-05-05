@@ -1,29 +1,11 @@
-const schedule = require('node-schedule')
-const PodcastWorkerQueue = require('./queue')
-const Parser = require('rss-parser')
+const PodcastWorkerQueue = require('./lib/queue')
+const { sequelize } = require('./models')
+const rssFetching = require('./app')
 
-const parser = new Parser({
-  headers: {
-    Accept: 'application/rss+xml, application/xml',
-  },
-})
-
-// var j = schedule.scheduleJob('5 * * * * *', function (firebase) {
-//   console.log(
-//     'The answer to life, the universe, and everything! ' +
-//       firebase +
-//       ', but actually ran at ' +
-//       new Date()
-//   )
-// })
-// const intervalID = setInterval(() => console.log('Task executed'), 5000)
-
-// intervalID
-//https://changelog.com/master/feed
-
-async function rssFetching() {
-  let feed = await parser.parseURL('https://changelog.com/master/feed')
-  console.log(feed.items)
-}
-
-rssFetching()
+sequelize
+  .sync({ force: true })
+  .then(rssFetching)
+  .then(() => {
+    console.log('success')
+  })
+  .catch(() => console.error('fail'))
