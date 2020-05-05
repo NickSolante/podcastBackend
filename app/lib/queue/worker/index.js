@@ -1,10 +1,20 @@
-const schedule = require('node-schedule')
+const rssFetching = require('../../../app')
+const { sequelize, models } = require('../../../models/')
 
-var j = schedule.scheduleJob('5 * * * * *', function (firebase) {
-  console.log(
-    'The answer to life, the universe, and everything! ' +
-      firebase +
-      ', but actually ran at ' +
-      new Date()
+const { Podcast } = models
+
+const fetchContent = async (job) => {
+  const { data } = job
+  const { name, link } = data
+
+  console.log(`fetching data for ${name}`)
+  const feed = await fetchFeed(link)
+
+  await sequelize.transaction((transaction) =>
+    Promise.all(
+      feed.map((podcast) => {
+        return Podcast.upsert(podcast, { transaction })
+      })
+    )
   )
-})
+}

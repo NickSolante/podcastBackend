@@ -11,8 +11,8 @@ const parser = new Parser({
 const { sequelize, models } = require('./models')
 const { Podcast } = models
 
-async function rssFetching() {
-  let feed = await parser.parseURL('http://podcasts.joerogan.net/feed')
+async function rssFetching(url) {
+  let feed = await parser.parseURL(url)
   return feed.items.map((item) => ({
     pcreatorID: item.creator,
     title: item.title,

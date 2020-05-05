@@ -4,7 +4,9 @@ const rssFetching = require('./app')
 
 sequelize
   .sync({ force: true })
-  .then(rssFetching)
+  .then(() => {
+    PodcastWorkerQueue.process('*', fetchContent)
+  })
   .then(() => {
     console.log('success')
   })
