@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Queue = require('bull')
 const contentConfig = require('../../content/index')
 const { REDIS_URL } = process.env
