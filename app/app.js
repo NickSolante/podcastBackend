@@ -25,14 +25,4 @@ const rssFetching = async (url) => {
   }))
 }
 
-// rssFetching().then((finalFeed) => {
-//   return sequelize.transaction((transaction) =>
-//     Promise.all(
-//       finalFeed.map((post) => {
-//         return Podcast.upsert(post, { transaction })
-//       })
-//     )
-//   )
-// })
-
 module.exports = { rssFetching }

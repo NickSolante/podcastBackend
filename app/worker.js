@@ -15,7 +15,7 @@ const onCompleteFetchContent = (job, feed) => {
   return latestTimestamp < oneMonthAgo && alert.warn(job.data.name)
 }
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({}).then(() => {
   PodcastWorkerQueue.process('*', fetchContent)
   PodcastWorkerQueue.on('failed', onFailFetchContent)
   PodcastWorkerQueue.on('completed', onCompleteFetchContent)
