@@ -9,7 +9,7 @@ services:
     ports:
       - 5432:5432
     # volumes:
-    #   - .:/app
+    #   - /Users/nicksolante/Dont/GH/podcastBackend/app/volume:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_USER=postgres

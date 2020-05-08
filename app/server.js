@@ -3,13 +3,15 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 const { sequelize, models } = require('./models')
+const { Podcast } = models
 
 const { PORT } = process.env
 
 app.use(cors)
 
-app.get('/', (req, res) => {
-  res.send({ message: 'endpoint working' })
+app.get('/podcast', async (req, res) => {
+  const feed = await Podcast.findAll()
+  res.send({ data: feed })
 })
 
 sequelize
