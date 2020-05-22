@@ -18,7 +18,7 @@ const rssFetching = async (url) => {
     pcreatorID: item.creator,
     title: item.title,
     link: item.link,
-    pubDate: item.pubDate,
+    pubDate: item.pubDat,
     contentSnippet: item.contentSnippet,
     guid: md5(get(item, 'guid', item.link)),
     isoDate: item.isoDate,
