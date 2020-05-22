@@ -1,18 +1,15 @@
 require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
-const app = express()
+const router = require('./routes')
 const { sequelize, models } = require('./models')
 const { Podcast } = models
 
 const { PORT } = process.env
+const app = express()
 
 app.use(cors)
-
-app.get('/podcast', async (req, res) => {
-  const feed = await Podcast.findAll()
-  res.send({ data: feed })
-})
+app.use(router)
 
 sequelize
   .sync()
