@@ -14,7 +14,7 @@ app.use(router)
 sequelize
   .sync()
   .then(() => {
-    app.listen(PORT, () => console.log(`listening to podcst ${PORT}`))
+    app.listen(PORT, () => console.log(`listening to podcast ${PORT}`))
     console.log('success')
   })
   .catch(() => console.error('fail'))
