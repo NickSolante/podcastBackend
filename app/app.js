@@ -1,19 +1,15 @@
-const fetch = require('node-fetch')
-const { md5 } = require('./lib/hash')
-const { get } = require('lodash')
-const Parser = require('rss-parser')
+const { md5 } = require('./lib/hash');
+const { get } = require('lodash');
+const Parser = require('rss-parser');
 const parser = new Parser({
   headers: {
     Accept: 'application/rss+xml, application/xml',
   },
-})
-
-const { sequelize, models } = require('./models')
-const { Podcast } = models
+});
 
 const rssFetching = async (url) => {
-  let feed = await parser.parseURL(url)
-  console.log('here in rss fetching')
+  let feed = await parser.parseURL(url);
+  console.log('here in rss fetching');
   return feed.items.map((item) => ({
     pcreatorID: item.creator,
     title: item.title,
@@ -22,7 +18,7 @@ const rssFetching = async (url) => {
     contentSnippet: item.contentSnippet,
     guid: md5(get(item, 'guid', item.link)),
     isoDate: item.isoDate,
-  }))
-}
+  }));
+};
 
-module.exports = { rssFetching }
+module.exports = { rssFetching };

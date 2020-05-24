@@ -29,8 +29,8 @@ const podcast = (sequelize, DataTypes) => {
       type: DataTypes.STRING(1234),
       allowNull: true,
     },
-  })
-  return Podcast
-}
+  });
+  return Podcast;
+};
 
-module.exports = podcast
+module.exports = podcast;
