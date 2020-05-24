@@ -1,36 +1,32 @@
-const Parser = require('rss-parser')
-require('dotenv').config()
-const { md5 } = require('./lib/hash')
-const { get } = require('lodash')
-const contentConfig = require('./content/index')
-const parser = new Parser({
-  headers: {
-    Accept: 'application/rss+xml, application/xml',
-  },
-})
+// const Parser = require('rss-parser');
+// require('dotenv').config();
+// const { md5 } = require('./lib/hash');
+// const { get } = require('lodash');
 
-const { REDIS_URL } = process.env
+// const parser = new Parser({
+//   headers: {
+//     Accept: 'application/rss+xml, application/xml',
+//   },
+// });
 
 // intervalID
 //https://changelog.com/master/feed
 //feeds.feedwrench.com/dev-ed.rss'
 
 //rss.simplecast.com/podcasts/279/rss
-const rssFetching = async (url) => {
-  let feed = await parser.parseURL(
-    'https://rss.simplecast.com/podcasts/279/rss'
-  )
-  finalFeed = feed.items.map((item) => ({
-    pcreatorID: item.creator,
-    title: item.title,
-    link: item.link,
-    pubDate: item.pubDate,
-    contentSnippet: item.contentSnippet,
-    guid: md5(get(item, 'guid', item.link)),
-    isoDate: item.isoDate,
-  }))
-  console.log(finalFeed)
-}
+// const rssFetching = async (url) => {
+//   let feed = await parser.parseURL('https://rss.simplecast.com/podcasts/279/rss');
+//   const finalFeed = feed.items.map((item) => ({
+//     pcreatorID: item.creator,
+//     title: item.title,
+//     link: item.link,
+//     pubDate: item.pubDate,
+//     contentSnippet: item.contentSnippet,
+//     guid: md5(get(item, 'guid', item.link)),
+//     isoDate: item.isoDate,
+//   }));
+//   console.log(finalFeed);
+// };
 
 // rssFetching()
 
@@ -66,8 +62,8 @@ const rssFetching = async (url) => {
 //   }))
 // }
 
-const fetchContent = async (job) => {
-  const feed = await rssFetching('https://changelog.com/jsparty/feed')
-}
+// const fetchContent = async (job) => {
+//   const feed = await rssFetching('https://changelog.com/jsparty/feed');
+// };
 
-fetchContent()
+// fetchContent();

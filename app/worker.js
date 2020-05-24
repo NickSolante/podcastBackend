@@ -12,7 +12,7 @@ const onCompleteFetchContent = (job, feed) => {
   const sortedTimestamps = feed.map((item) => item.timestamp).sort();
   const latestTimestamp = sortedTimestamps[sortedTimestamps.length - 1];
   const oneMonthAgo = moment().subtract(1, 'months').unix();
-  return latestTimestamp < oneMonthAgo && alert.warn(job.data.name);
+  return latestTimestamp < oneMonthAgo;
 };
 
 sequelize.sync({}).then(() => {
